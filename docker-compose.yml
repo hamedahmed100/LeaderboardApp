@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  leaderboardapp:
+    image: ${DOCKER_REGISTRY-}leaderboardapp
+    build:
+      context: .
+      dockerfile: LeaderboardApp/Dockerfile
