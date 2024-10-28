@@ -1,3 +1,7 @@
+using LeaderboardApp.Data;
+using LeaderboardApp.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +10,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+// In-memory database configuration
+builder.Services.AddDbContext<LeaderboardContext>   (options => options.UseInMemoryDatabase("LeaderboardDb"));
+
+// Register repository
+builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 
 var app = builder.Build();
 

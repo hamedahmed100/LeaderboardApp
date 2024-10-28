@@ -1,10 +1,21 @@
 ﻿namespace LeaderboardApp.Models
 {
-    public class Team
+
+    public class CreateTeam
     {
         public int TeamId { get; set; }
         public string Name { get; set; } = string.Empty;
-        public List<Counter> Counters { get; set; } = new List<Counter>();
-        public int TotalSteps => Counters.Sum(c => c.Steps);
+
+    }
+    public class Team : CreateTeam
+    {
+
+        public int TotalSteps { get; set; }
+    }
+    public class TeamCounters 
+    {
+        public Team? Team { get; set; }
+        public List<Counter>? Counters { get; set; }
+
     }
 }
