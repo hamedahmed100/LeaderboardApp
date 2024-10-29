@@ -40,12 +40,12 @@ To get started with the Team Step Leaderboard application:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/hamedahmed100/team-step-leaderboard.git
+    git clone https://github.com/hamedahmed100/LeaderboardApp.git
     ```
 
 2. Navigate to the project directory:
     ```bash
-    cd team-step-leaderboard
+    cd LeaderboardApp
     ```
 
 3. Build the application:
@@ -58,4 +58,4 @@ To get started with the Team Step Leaderboard application:
     dotnet run
     ```
 
-5. Access the API at `http://localhost:5000/api/Teams`.
+5. Access the API at `http://localhost/api/Teams`.
