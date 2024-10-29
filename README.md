@@ -40,7 +40,7 @@ To get started with the Team Step Leaderboard application:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/team-step-leaderboard.git
+    git clone https://github.com/hamedahmed100/team-step-leaderboard.git
     ```
 
 2. Navigate to the project directory:
