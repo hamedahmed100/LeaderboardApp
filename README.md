@@ -59,3 +59,58 @@ To get started with the Team Step Leaderboard application:
     ```
 
 5. Access the API at `http://localhost/api/Teams`.
+
+## Deploying on AWS EC2
+
+If you want to deploy the project on AWS EC2, follow these steps:
+
+1. **Connect to your EC2 instance** via SSH.
+
+2. **Run the following script** to set up Docker and deploy the application:
+
+    ```bash
+    # Update package lists
+    sudo apt update
+
+    # Install Docker
+    sudo apt install -y docker.io
+
+    # Start Docker and enable it to run on startup
+    sudo systemctl start docker
+    sudo systemctl enable docker
+
+    # Set variables
+    REPO_URL="https://github.com/hamedahmed100/LeaderboardApp.git"
+    APP_NAME="leaderboardapp"
+    DOCKER_IMAGE="leaderboardapp-image"
+    DOCKER_CONTAINER="leaderboardapp-container"
+
+    # Stop and remove existing container if running
+    sudo docker stop $DOCKER_CONTAINER || true
+    sudo docker rm $DOCKER_CONTAINER || true
+
+    # Clone or update the repository
+    cd /home/ubuntu
+    if [ -d "$APP_NAME" ]; then
+      cd $APP_NAME
+      git pull
+    else
+      git clone $REPO_URL $APP_NAME
+      cd $APP_NAME
+    fi
+
+    # Build the Docker image
+    sudo docker build -t $DOCKER_IMAGE -f LeaderboardApp/Dockerfile .
+
+    # Run the container with specified ports
+    sudo docker run -d --name $DOCKER_CONTAINER -p 8080:8080 -p 8081:8081 $DOCKER_IMAGE
+
+    # Verify that the Container is Running
+    sudo docker ps
+
+    # Check docker logs
+    sudo docker logs leaderboardapp-container
+    ```
+
+3. After running the script, you should be able to access the API on your EC2 instance's public IP at `http://<EC2_PUBLIC_IP>:8080/api/Teams`.
+
