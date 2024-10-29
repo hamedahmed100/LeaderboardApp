@@ -18,14 +18,25 @@ builder.Services.AddDbContext<LeaderboardContext>   (options => options.UseInMem
 // Register repository
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 
+// Disable HTTPS redirection in production
+if (!builder.Environment.IsDevelopment())
+{
+    builder.Services.Configure<Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionOptions>(options => options.HttpsPort = null);
+}
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+
+// Configure the HTTP request pipeline
+if (!app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
 }
+
+// Ensure Swagger is available in production as well
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
